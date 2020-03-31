@@ -1,0 +1,6 @@
+model_checkpoint_path: "/home/ops/predictor/pred_ps_package-2/model/ps_model_20190814_0/model.ckpt-473799"
+all_model_checkpoint_paths: "/home/ops/predictor/pred_ps_package-2/model/ps_model_20190814_0/model.ckpt-343799"
+all_model_checkpoint_paths: "/home/ops/predictor/pred_ps_package-2/model/ps_model_20190814_0/model.ckpt-358999"
+all_model_checkpoint_paths: "/home/ops/predictor/pred_ps_package-2/model/ps_model_20190814_0/model.ckpt-426399"
+all_model_checkpoint_paths: "/home/ops/predictor/pred_ps_package-2/model/ps_model_20190814_0/model.ckpt-444199"
+all_model_checkpoint_paths: "/home/ops/predictor/pred_ps_package-2/model/ps_model_20190814_0/model.ckpt-473799"

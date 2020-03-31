@@ -1,0 +1,21 @@
+{
+  "recommended_queues": ["landslide-predictor-basic"],
+  "command": "/home/ops/run.sh",
+  "imported_worker_files": {
+    "/home/ops/.netrc": "/home/ops/.netrc",
+    "/home/ops/.aws": "/home/ops/.aws"
+  },
+  "soft_time_limit": 600,
+  "time_limit": 600,
+  "disk_usage": "1000GB",
+  "params": [
+    {
+      "name": "dummy",
+      "destination": "context"
+    },
+    {
+      "name":"localize_products",
+      "destination": "localize"
+    } 
+  ]
+}
