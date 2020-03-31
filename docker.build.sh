@@ -7,5 +7,5 @@ context=.
 
 #    --no-cache \
 docker build ${context} \
-    --file ${context}/${name}/Dockerfile \
+    --file ${context}/docker/Dockerfile \
     --tag hysds/${name}:20200327
