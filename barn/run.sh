@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 # prepare timeseries
 (
@@ -8,7 +8,13 @@ date
 
 cd /home/ops/timeseries
 
-sh ./run.sh
+inputDirPath=/home/xing/hysds/stamps/data/apt-stamps-test/INSAR_20171004
+
+sh ./run.sh $inputDirPath
+
+# copy output to input dir of predictor
+pickleFileName=displacement.pickle
+mv ./$pickleFileName /home/ops/predictor/input
 
 date
 )
@@ -17,7 +23,7 @@ date
 (
 date
 
-cd /home/ops/predictor/pred_ps_package-2
+cd /home/ops/predictor
 
 sh ./run.sh
 
