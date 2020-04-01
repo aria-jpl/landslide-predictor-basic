@@ -20,6 +20,7 @@ RUN mkdir -p ./predictor/{input,output}
 
 COPY ./barn/predictor/pred_ps_package-2.tar.gz ./predictor
 COPY ./barn/predictor/install.sh ./predictor
+COPY ./barn/predictor/TFManager.py ./predictor
 COPY ./barn/predictor/checkpoint ./predictor
 COPY ./barn/predictor/run.sh ./predictor
 
