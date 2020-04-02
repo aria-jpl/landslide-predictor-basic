@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 # ------------------------------------------------------------------------------
 # Automatically determines the full canonical path of where this script is
@@ -13,6 +13,8 @@ BASE_PATH=$(cd "${BASE_PATH}"; pwd)
 # get the name of the script
 BASE_NAME=$(basename "${BASH_SOURCE}")
 # ------------------------------------------------------------------------------
+
+WORK_DIR=$(pwd)
 
 # prepare timeseries
 (
@@ -28,7 +30,7 @@ cd $BASE_PATH/timeseries
 #    INSAR_DATE_DIR=${DIR}
 #    break
 #done
-inputDirPath=$(find -L "${BASE_PATH}" -type d| grep 's1-timeseries-ps-stamps-' | grep INSAR_)
+inputDirPath=$(find -L "${WORK_DIR}" -type d| grep 's1-timeseries-ps-stamps-' | grep INSAR_)
 
 echo "++++++++++=", $inputDirPath
 
