@@ -5,8 +5,8 @@
     "/home/ops/.netrc": "/home/ops/.netrc",
     "/home/ops/.aws": "/home/ops/.aws"
   },
-  "soft_time_limit": 600,
-  "time_limit": 600,
+  "soft_time_limit": 1800,
+  "time_limit": 1900,
   "disk_usage": "1000GB",
   "params": [
     {
