@@ -31,3 +31,6 @@ conda activate python368
 echo dddddd
 
 pip install -r ./requirements.txt
+
+#conda run -n python368 pip uninstall pandas
+#conda run -n python368 pip install pandas

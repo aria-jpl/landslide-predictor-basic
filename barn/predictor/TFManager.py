@@ -6,9 +6,9 @@ import tensorflow as tf
 from binary_data_handler import BinaryDataHandler
 import argparse
 import json
-from matplotlib import pyplot as plt
-import matplotlib as mpl
-mpl.rcParams['image.cmap'] = 'jet'
+#from matplotlib import pyplot as plt
+#import matplotlib as mpl
+#mpl.rcParams['image.cmap'] = 'jet'
 import importlib
 import shutil
 from datetime import datetime
