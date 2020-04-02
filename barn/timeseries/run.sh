@@ -14,6 +14,8 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
+eval "$(/opt/conda/bin/conda shell.bash hook)"
+
 # compute displacement
 inputDirPath=$1
 outputDirPath="."

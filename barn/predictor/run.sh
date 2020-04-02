@@ -3,6 +3,7 @@
 set -e
 
 (
+eval "$(/opt/conda/bin/conda shell.bash hook)"
 
 cd ./pred_ps_package-2/ps_app
 

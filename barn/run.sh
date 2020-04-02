@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xv
 
 #set -e
 
@@ -15,9 +15,18 @@ BASE_NAME=$(basename "${BASH_SOURCE}")
 # ------------------------------------------------------------------------------
 
 WORK_DIR=$(pwd)
+echo $WORK_DIR
+
+eval "$(/opt/conda/bin/conda shell.bash hook)"
+
+echo "which conda"
+which conda
+
 
 # prepare timeseries
 (
+echo "prepare timeseries"
+
 date
 
 cd $BASE_PATH/timeseries
@@ -34,7 +43,7 @@ inputDirPath=$(find -L "${WORK_DIR}" -type d| grep 's1-timeseries-ps-stamps-' | 
 
 echo "++++++++++=", $inputDirPath
 
-sh ./run.sh $inputDirPath
+sh -xv ./run.sh $inputDirPath
 
 # copy output to input dir of predictor
 pickleFileName=displacement.pickle
@@ -45,11 +54,13 @@ date
 
 # run predictor
 (
+echo "run predictor"
+
 date
 
 cd $BASE_PATH/predictor
 
-sh ./run.sh
+sh -xv ./run.sh
 
 date
 )
@@ -69,5 +80,5 @@ echo ${LANDSLIDE_DATASET}
 mkdir ${LANDSLIDE_DATASET}
 cp ${TIMESERIES_DATASET}/${TIMESERIES_DATASET}.dataset.json  ${LANDSLIDE_DATASET}/${LANDSLIDE_DATASET}.dataset.json
 #mv ${BASE_PATH}/{timeseries,predictor} ${LANDSLIDE_DATASET}
-mv ${BASE_PATH}/timeseries ${LANDSLIDE_DATASET}
-mv ${BASE_PATH}/predictor ${LANDSLIDE_DATASET}
+cp -pr ${BASE_PATH}/timeseries ${LANDSLIDE_DATASET}
+cp -pr ${BASE_PATH}/predictor ${LANDSLIDE_DATASET}
