@@ -15,14 +15,14 @@ BASE_NAME=$(basename "${BASH_SOURCE}")
 # ------------------------------------------------------------------------------
 
 WORK_DIR=$(pwd)
-echo $WORK_DIR
+echo "WORK_DIR:" $WORK_DIR
 
 eval "$(/opt/conda/bin/conda shell.bash hook)"
 
 echo "which conda"
 which conda
 
-
+#------
 # prepare timeseries
 (
 echo "prepare timeseries"
@@ -31,27 +31,20 @@ date
 
 cd $BASE_PATH/timeseries
 
-#inputDirPath=/home/xing/hysds/stamps/data/apt-stamps-test/INSAR_20171004
-#inputDirPath=/home/xing/hysds/stamps/data/apt-stamps-test/INSAR_20171004
-#inputDirPath=$( $BASE_PATH/s1-timeseries-ps-stamps-*/INSAR_*)
-####find "${BASE_PATH}/s1-timeseries-ps-stamps-*" -type d -name 's1-timeseries-ps-stamps-*' | grep INSAR_ | while read DIR; do
-#find "${BASE_PATH}" -type d -name 's1-timeseries-ps-stamps-*' | grep INSAR_ | while read DIR; do
-#    INSAR_DATE_DIR=${DIR}
-#    break
-#done
 inputDirPath=$(find -L "${WORK_DIR}" -type d| grep 's1-timeseries-ps-stamps-' | grep INSAR_)
 
-echo "++++++++++=", $inputDirPath
+echo "input dir path:", $inputDirPath
 
 sh -xv ./run.sh $inputDirPath
 
 # copy output to input dir of predictor
-pickleFileName=displacement.pickle
+pickleFileName=ps.displacement.pickle
 mv ./$pickleFileName ${BASE_PATH}/predictor/input
 
 date
 )
 
+#------
 # run predictor
 (
 echo "run predictor"
@@ -65,20 +58,35 @@ sh -xv ./run.sh
 date
 )
 
-#TIMESTAMP=$(date +%Y%m%dT%H%M%S%Z)
-#DATASET="landslide-predictor-results-${TIMESTAMP}"
-#mkdir ${DATASET}
-#mv /home/ops/{timeseries,predictor} ${DATASET}
-#cd ${BASE_PATH}
+#------
+# run plot
+(
+echo "run plot"
 
-#TIMESERIES_DATASET="$(ls s1-timeseries-ps-stamps*) | head -1"
+date
+
+cd ${BASE_PATH}/plot
+
+lonlatFilePath=${BASE_PATH}/timeseries/ps.lonlat.npy
+predictionFilePath=${BASE_PATH}/predictor/output/ps.displacement.pred
+outputFilePath=./ps.prediction.png
+sh -xv ./run.sh $lonlatFilePath $predictionFilePath $outputFilePath
+
+date
+)
+
+#------
+# save result
+
 TIMESERIES_DATASET=$(find -L . -type d | grep s1-timeseries|head -n 1)
 TIMESERIES_DATASET=$(basename ${TIMESERIES_DATASET})
-echo "+++++++++++++=" ${TIMESERIES_DATASET}
+echo "TIMESERIES_DATASET:" ${TIMESERIES_DATASET}
+
 LANDSLIDE_DATASET="landslides-${TIMESERIES_DATASET}"
-echo ${LANDSLIDE_DATASET}
+echo "LANDSLIDE_DATASET:" ${LANDSLIDE_DATASET}
 mkdir ${LANDSLIDE_DATASET}
+
 cp ${TIMESERIES_DATASET}/${TIMESERIES_DATASET}.dataset.json  ${LANDSLIDE_DATASET}/${LANDSLIDE_DATASET}.dataset.json
-#mv ${BASE_PATH}/{timeseries,predictor} ${LANDSLIDE_DATASET}
 cp -pr ${BASE_PATH}/timeseries ${LANDSLIDE_DATASET}
 cp -pr ${BASE_PATH}/predictor ${LANDSLIDE_DATASET}
+cp -pr ${BASE_PATH}/plot ${LANDSLIDE_DATASET}

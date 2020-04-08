@@ -19,18 +19,19 @@ eval "$(/opt/conda/bin/conda shell.bash hook)"
 # compute displacement
 inputDirPath=$1
 outputDirPath="."
+outputFileNamePrefix="ps"
 #
-$python368 compute_displacement.py $inputDirPath $outputDirPath
+$python368 compute_displacement.py $inputDirPath $outputDirPath $outputFileNamePrefix
 
 # convert displacement from npy to pickle
-inputFilePath="./displacement.npy"
-outputFilePath="./displacement.pickle"
+inputFilePath=${outputFileNamePrefix}".displacement.npy"
+outputFilePath=${outputFileNamePrefix}".displacement.pickle"
 #
 $python368 convert_to_pickle.py $inputFilePath $outputFilePath
 
 # plot to compare original (in npy) and interpolated (in pickle) displacement
 npyFilePath=$inputFilePath
 pickleFilePath=$outputFilePath
-outputFilePath="./displacement.png"
+outputFilePath=${outputFileNamePrefix}".displacement.png"
 #
 $python368 check_plot.py $npyFilePath $pickleFilePath $outputFilePath
