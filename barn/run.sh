@@ -38,8 +38,7 @@ echo "input dir path:", $inputDirPath
 sh -xv ./run.sh $inputDirPath
 
 # copy output to input dir of predictor
-pickleFileName=ps.displacement.pickle
-mv ./$pickleFileName ${BASE_PATH}/predictor/input
+mv ./ps.????.displacement.pickle ${BASE_PATH}/predictor/input
 
 date
 )
