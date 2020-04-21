@@ -33,6 +33,9 @@ def get_lonlat_for_one_part(fileNamePrefix, lonlatDirPath, predictionDirPath, pa
         lon.append(lonlat[idx, 0])
         lat.append(lonlat[idx, 1])
 
+    if len(lon) == 0 or len(lat) == 0:
+        return [lon, lat]
+
     print(min(lon), max(lon))
     print(min(lat), max(lat))
 
@@ -59,7 +62,7 @@ for x in os.listdir(predictionDirPath):
 
 if len(parts) == 0:
     print("No part found")
-    sys.exit(-1)
+    sys.exit(0)
 
 print("Parts found:", parts)
 
@@ -71,6 +74,10 @@ for partName in parts:
      x, y = get_lonlat_for_one_part(fileNamePrefix, lonlatDirPath, predictionDirPath, partName)
      lon.extend(x)
      lat.extend(y)
+
+if len(lon) == 0 or len(lat) == 0:
+    print("No location predicted")
+    sys.exit(0)
 
 print(len(lon))
 print(len(lat))
@@ -86,4 +93,5 @@ plt.title("predicted location")
 
 plt.scatter(lon, lat, marker=".", linewidth=1)
 
+print("save prediction plot to", outputFilePath)
 plt.savefig(outputFilePath, dpi=100)

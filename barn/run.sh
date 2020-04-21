@@ -66,10 +66,11 @@ date
 
 cd ${BASE_PATH}/plot
 
-lonlatFilePath=${BASE_PATH}/timeseries/ps.lonlat.npy
-predictionFilePath=${BASE_PATH}/predictor/output/ps.displacement.pred
-outputFilePath=./ps.prediction.png
-sh -xv ./run.sh $lonlatFilePath $predictionFilePath $outputFilePath
+fileNamePrefix="ps"
+lonlatDirPath=${BASE_PATH}/timeseries
+predictionDirPath=${BASE_PATH}/predictor/output
+outputFilePath=./${fileNamePrefix}.all.prediction.png
+sh -xv ./plot_prediction_all.sh $fileNamePrefix $lonlatDirPath $predictionDirPath $outputFilePath
 
 date
 )

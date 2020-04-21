@@ -18,4 +18,4 @@ eval "$(/opt/conda/bin/conda shell.bash hook)"
 lonlatFilePath=$1
 predictionFilePath=$2
 outputFilePath=$3
-$python368 plot_prediction.py $lonlatFilePath $predictionFilePath $outputFilePath
+$python368 plot_prediction_one.py $lonlatFilePath $predictionFilePath $outputFilePath
