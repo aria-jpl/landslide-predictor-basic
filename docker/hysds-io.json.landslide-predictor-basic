@@ -1,5 +1,5 @@
 {
-  "label": "landslide-predictor-basic Processor (develop)",
+  "label": "landslide-predictor-basic Processor",
   "submission_type": "individual",
   "allowed_accounts": [ "ops" ],
   "action-type":  "both",
