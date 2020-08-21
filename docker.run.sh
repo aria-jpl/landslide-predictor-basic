@@ -4,10 +4,10 @@ set -e
 
 name=landslide-predictor-basic
 
+#    --rm \
 docker run \
     --name ${name} \
-    -v /home/xing/hysds:/home/xing/hysds \
-    -v /home/xing/hysds/landslide/try:/home/ops/try \
-    --rm \
+    -v ~/hysds/landslide:/home/ops/landslide \
     -it \
-    hysds/${name}:20200327 bash
+    hysds/${name}:20200821 /bin/bash
+#    --entrypoint=/bin/bash \
