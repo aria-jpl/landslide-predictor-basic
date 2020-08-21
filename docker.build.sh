@@ -8,4 +8,4 @@ context=.
 #    --no-cache \
 docker build ${context} \
     --file ${context}/docker/Dockerfile \
-    --tag hysds/${name}:20200327
+    --tag hysds/${name}:20200821

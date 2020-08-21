@@ -1,20 +1,10 @@
-FROM hysds/pge-base:latest
+FROM hysds1/pge-base-conda-python368:20200818
 
 LABEL maintainer="hysds"
 
 USER ops
 
-COPY ./barn/install-python-3.6.8.sh /home/ops
-COPY ./barn/requirements.txt /home/ops
-COPY ./barn/conda-init.sh /home/ops
-
 COPY ./barn/run.sh /home/ops
-
-RUN sh -xv ~/install-python-3.6.8.sh && \
-    rm ~/install-python-3.6.8.sh && \
-    rm ~/conda-init.sh && \
-    rm ~/requirements.txt
-
 
 # timeseries
 
