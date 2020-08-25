@@ -1,0 +1,1 @@
+sh fetch_from_s3.sh s3://aria-dev-lts-fwd-xing/test-landslide/from-giangi.2020080x/sample ./input

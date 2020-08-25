@@ -5,6 +5,7 @@ LABEL maintainer="hysds"
 USER ops
 
 COPY ./barn/run.sh /home/ops
+COPY ./barn/get_param.py /home/ops
 
 # timeseries
 
@@ -12,6 +13,9 @@ RUN mkdir -p ./timeseries
 
 COPY ./barn/timeseries ./timeseries
 
+# timeseries from mintpy
+
+COPY ./barn/ts_mintpy ./ts_mintpy
 
 # predictor
 

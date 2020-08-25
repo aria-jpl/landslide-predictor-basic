@@ -17,6 +17,8 @@ BASE_NAME=$(basename "${BASH_SOURCE}")
 WORK_DIR=$(pwd)
 echo "WORK_DIR:" $WORK_DIR
 
+s3Uri=`python get_param.py`
+
 eval "$(/opt/conda/bin/conda shell.bash hook)"
 
 echo "which conda"
@@ -29,16 +31,14 @@ echo "prepare timeseries"
 
 date
 
-cd $BASE_PATH/timeseries
+cd $BASE_PATH/ts_mintpy
 
-inputDirPath=$(find -L "${WORK_DIR}" -type d| grep 's1-timeseries-ps-stamps-' | grep INSAR_)
+#s3Uri=s3://aria-dev-lts-fwd-xing/test-landslide/from-hook-20200820/_mintpy_time_series
 
-echo "input dir path:", $inputDirPath
+sh -xv ./run.sh $s3Uri
 
-sh -xv ./run.sh $inputDirPath
-
-# copy output to input dir of predictor
-mv ./ps.????.displacement.pickle ${BASE_PATH}/predictor/input
+# move some files under ./output to input dir of predictor
+mv ./output/pred_input_*_data.pickle ${BASE_PATH}/predictor/input
 
 date
 )
