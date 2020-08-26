@@ -1,9 +1,11 @@
 #!/bin/bash
 
 WORK_DIR=$(pwd)
+echo "WORK_DIR:" $WORK_DIR
 
 BASE_PATH=$(dirname "${BASH_SOURCE}")
 BASE_PATH=$(cd "${BASE_PATH}"; pwd)
+echo "BASE_PATH:" $BASE_PATH
 
 #------
 # do work at its own dir
@@ -18,11 +20,11 @@ cp -avi $BASE_PATH/create_dataset.sh $BASE_PATH/work
 
 cp -avi $BASE_PATH/{ts_mintpy,predictor,plot} $BASE_PATH/work
 
-(
-cd $BASE_PATH/work
+#------
+echo "pwd"
+pwd
 
-sh -xv ./run.sh
-)
+sh -xv $BASE_PATH/work/run.sh
 
 #------
 # save result
