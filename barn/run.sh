@@ -40,7 +40,7 @@ cd $BASE_PATH/ts_mintpy
 sh -xv ./run.sh $s3Uri
 
 # move some files under ./output to input dir of predictor
-mv ./output/pred_input_*_data.pickle ${BASE_PATH}/predictor/input
+cp -pr ./output/pred_input_*_data.pickle ${BASE_PATH}/predictor/input
 
 date
 )
@@ -59,36 +59,30 @@ sh -xv ./run.sh
 date
 )
 
-##------
-## run plot
-#(
-#echo "run plot"
-#
-#date
-#
-#cd ${BASE_PATH}/plot
-#
-#fileNamePrefix="ps"
-#lonlatDirPath=${BASE_PATH}/timeseries
-#predictionDirPath=${BASE_PATH}/predictor/output
-#outputFilePath=./${fileNamePrefix}.all.prediction.png
-#sh -xv ./plot_prediction_all.sh $fileNamePrefix $lonlatDirPath $predictionDirPath $outputFilePath
-#
-#date
-#)
+#------
+# run plot
+(
+echo "run plot"
+
+date
+
+cd ${BASE_PATH}/plot
+
+sh -xv ./run.sh
+
+date
+)
 
 #------
 # save result
+(
+echo "create dataset"
 
-timeStamp=$(date +%Y%m%dT%H%M%S.%NZ)
-datasetName="landslide-prediction-"${timeStamp}
+date
 
-datasetDirPath=./${datasetName}
+cd ${BASE_PATH}
 
-echo create dataset under $datasetDirPath
+sh -xv ./create_dataset.sh $WORK_DIR $BASE_PATH
 
-mkdir -p $datasetDirPath
-
-echo "{}" > ${datasetDirPath}/${datasetName}.dataset.json
-cp -pr ${BASE_PATH}/ts_mintpy $datasetDirPath
-cp -pr ${BASE_PATH}/predictor $datasetDirPath
+date
+)

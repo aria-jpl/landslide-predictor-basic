@@ -27,10 +27,10 @@ nice -20 \
     conda run -n python368 \
     python3.6 ./mintpy2pred.py \
     -d $inputDirPath \
-    -c maskTempCoh.h5 \
-    -t timeseries_demErr.h5 \
-    -e mask \
     -o $outputDirPath \
-    -k
+#    -c maskTempCoh.h5 \
+#    -t timeseries_demErr.h5 \
+#    -e mask \
+#    -k
 
 date

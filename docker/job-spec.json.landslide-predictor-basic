@@ -1,6 +1,6 @@
 {
   "recommended_queues": ["landslide-predictor-basic"],
-  "command": "/home/ops/run.sh",
+  "command": "/home/ops/do_it.sh",
   "imported_worker_files": {
     "/home/ops/.netrc": "/home/ops/.netrc",
     "/home/ops/.aws": "/home/ops/.aws"
