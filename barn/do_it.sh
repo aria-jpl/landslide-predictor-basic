@@ -1,16 +1,13 @@
 #!/bin/bash
 
-WORK_DIR=$(pwd)
-echo "WORK_DIR:" $WORK_DIR
-
 BASE_PATH=$(dirname "${BASH_SOURCE}")
 BASE_PATH=$(cd "${BASE_PATH}"; pwd)
 echo "BASE_PATH:" $BASE_PATH
 
 #------
-# do work at its own dir
 # 20200823, xing
-# this is a quick hack to go around file ownership issue in docker
+# make a new copy of involved tools/dirs/files to avoid permission error,
+# due to difference between uid built in docker image and uid used in running docker container.
 
 mkdir -p $BASE_PATH/work
 
@@ -25,17 +22,3 @@ echo "pwd"
 pwd
 
 sh -xv $BASE_PATH/work/run.sh
-
-#------
-# save result
-(
-echo "create dataset"
-
-date
-
-cd ${BASE_PATH}
-
-sh -xv ./create_dataset.sh $WORK_DIR $BASE_PATH/work
-
-date
-)
