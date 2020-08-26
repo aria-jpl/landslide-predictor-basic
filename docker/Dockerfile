@@ -2,20 +2,23 @@ FROM hysds1/pge-base-conda-python368:20200818
 
 LABEL maintainer="hysds"
 
-USER ops
+COPY --chown=ops:ops ./barn/run.sh /home/ops
+COPY --chown=ops:ops ./barn/get_param.py /home/ops
 
-COPY ./barn/run.sh /home/ops
-COPY ./barn/get_param.py /home/ops
+USER root
 
 # timeseries
 
-RUN mkdir -p ./timeseries
-
 COPY ./barn/timeseries ./timeseries
+
+RUN chown -R ops:ops ./timeseries
 
 # timeseries from mintpy
 
 COPY ./barn/ts_mintpy ./ts_mintpy
+
+RUN chown -R ops:ops ./ts_mintpy
+
 
 # predictor
 
@@ -34,6 +37,8 @@ RUN cd ./predictor && \
     rm ./pred_ps_package-2.tar.gz && \
     rm ./install.sh
 
+RUN chown -R ops:ops ./predictor
+
 
 # plot
 
@@ -41,6 +46,10 @@ RUN mkdir -p ./plot
 
 COPY ./barn/plot ./plot
 
+RUN chown -R ops:ops ./plot
+
+
+USER ops
 
 # Change to work directory
 WORKDIR /home/ops
