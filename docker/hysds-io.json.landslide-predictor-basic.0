@@ -1,0 +1,20 @@
+{
+  "label": "landslide-predictor-basic Processor",
+  "submission_type": "individual",
+  "allowed_accounts": [ "ops" ],
+  "action-type":  "both",
+  "params": [
+    {
+      "name": "dummy",
+      "from": "submitter",
+      "type": "number",
+      "optional": true
+    },
+    {
+      "name":"localize_products",
+      "from":"dataset_jpath:",
+      "type":"text",
+      "lambda" : "lambda ds: filter(lambda x: x.startswith('s3://'), ds['_source']['urls'])[0]"
+    }
+  ]
+}

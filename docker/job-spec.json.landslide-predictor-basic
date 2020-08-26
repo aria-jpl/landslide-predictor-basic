@@ -10,7 +10,11 @@
   "disk_usage": "1000GB",
   "params": [
     {
-      "name": "dummy",
+      "name": "s3uri",
+      "destination": "context"
+    },
+    {
+      "name": "misc",
       "destination": "context"
     },
     {
