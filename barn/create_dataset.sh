@@ -20,7 +20,7 @@ echo create dataset under $datasetDirPath
 mkdir -p $datasetDirPath
 
 # dataset.json
-echo "{'version':'v0.9','label':'"${datasetName}"'}" > ${datasetDirPath}/${datasetName}.dataset.json
+echo "{\"version\":\"v0.9\",\"label\":\""${datasetName}"\"}" > ${datasetDirPath}/${datasetName}.dataset.json
 
 # dataset.json
 echo "{}" > ${datasetDirPath}/${datasetName}.met.json
