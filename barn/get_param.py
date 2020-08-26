@@ -11,7 +11,7 @@ def main():
     except Exception as e:
         raise Exception("failed to parse context file %s: %s" % (path, e))
 
-    print(context["dummy"])
+    print(context["s3uri"])
 
 
 if __name__ == "__main__":

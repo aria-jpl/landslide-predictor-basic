@@ -5,9 +5,15 @@
   "action-type":  "both",
   "params": [
     {
-      "name": "dummy",
+      "name": "s3uri",
       "from": "submitter",
-      "type": "number",
+      "type": "text",
+      "optional": true
+    },
+    {
+      "name": "misc",
+      "from": "submitter",
+      "type": "text",
       "optional": true
     },
     {

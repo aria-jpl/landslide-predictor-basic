@@ -17,7 +17,9 @@ BASE_NAME=$(basename "${BASH_SOURCE}")
 WORK_DIR=$(pwd)
 echo "WORK_DIR:" $WORK_DIR
 
-s3Uri=`python get_param.py`
+
+s3Uri=`python $BASE_PATH/get_param.py`
+
 
 eval "$(/opt/conda/bin/conda shell.bash hook)"
 
@@ -57,36 +59,36 @@ sh -xv ./run.sh
 date
 )
 
-#------
-# run plot
-(
-echo "run plot"
-
-date
-
-cd ${BASE_PATH}/plot
-
-fileNamePrefix="ps"
-lonlatDirPath=${BASE_PATH}/timeseries
-predictionDirPath=${BASE_PATH}/predictor/output
-outputFilePath=./${fileNamePrefix}.all.prediction.png
-sh -xv ./plot_prediction_all.sh $fileNamePrefix $lonlatDirPath $predictionDirPath $outputFilePath
-
-date
-)
+##------
+## run plot
+#(
+#echo "run plot"
+#
+#date
+#
+#cd ${BASE_PATH}/plot
+#
+#fileNamePrefix="ps"
+#lonlatDirPath=${BASE_PATH}/timeseries
+#predictionDirPath=${BASE_PATH}/predictor/output
+#outputFilePath=./${fileNamePrefix}.all.prediction.png
+#sh -xv ./plot_prediction_all.sh $fileNamePrefix $lonlatDirPath $predictionDirPath $outputFilePath
+#
+#date
+#)
 
 #------
 # save result
 
-TIMESERIES_DATASET=$(find -L . -type d | grep s1-timeseries|head -n 1)
-TIMESERIES_DATASET=$(basename ${TIMESERIES_DATASET})
-echo "TIMESERIES_DATASET:" ${TIMESERIES_DATASET}
+timeStamp=$(date +%Y%m%dT%H%M%S.%NZ)
+datasetName="landslide-prediction-"${timeStamp}
 
-LANDSLIDE_DATASET="landslides-${TIMESERIES_DATASET}"
-echo "LANDSLIDE_DATASET:" ${LANDSLIDE_DATASET}
-mkdir ${LANDSLIDE_DATASET}
+datasetDirPath=./${datasetName}
 
-cp ${TIMESERIES_DATASET}/${TIMESERIES_DATASET}.dataset.json  ${LANDSLIDE_DATASET}/${LANDSLIDE_DATASET}.dataset.json
-cp -pr ${BASE_PATH}/timeseries ${LANDSLIDE_DATASET}
-cp -pr ${BASE_PATH}/predictor ${LANDSLIDE_DATASET}
-cp -pr ${BASE_PATH}/plot ${LANDSLIDE_DATASET}
+echo create dataset under $datasetDirPath
+
+mkdir -p $datasetDirPath
+
+echo "{}" > ${datasetDirPath}/${datasetName}.dataset.json
+cp -pr ${BASE_PATH}/ts_mintpy $datasetDirPath
+cp -pr ${BASE_PATH}/predictor $datasetDirPath
