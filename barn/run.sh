@@ -35,12 +35,13 @@ date
 
 cd $BASE_PATH/ts_mintpy
 
-#s3Uri=s3://aria-dev-lts-fwd-xing/test-landslide/from-hook-20200820/_mintpy_time_series
+s3Uri=s3://aria-dev-lts-fwd-xing/test-landslide/from-hook-20200820/_mintpy_time_series
 
 sh -xv ./run.sh $s3Uri
 
 # move some files under ./output to input dir of predictor
-cp -pr ./output/pred_input_*_data.pickle ${BASE_PATH}/predictor/input
+#cp -pr ./output/pred_input_*_data.pickle ${BASE_PATH}/predictor/input
+cp -pr ./output/pred_input_*_data.pck ${BASE_PATH}/predictor/input
 
 date
 )
