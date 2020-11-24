@@ -18,7 +18,7 @@ mkdir -p $outputDirPath
 date
 
 # fetch mintpy output from s3 to a local dir
-#sh ./fetch_from_s3.sh $s3Uri $inputDirPath
+sh ./fetch_from_s3.sh $s3Uri $inputDirPath
 
 date
 
