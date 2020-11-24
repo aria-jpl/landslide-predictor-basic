@@ -35,7 +35,7 @@ date
 
 cd $BASE_PATH/ts_mintpy
 
-s3Uri=s3://aria-dev-lts-fwd-xing/test-landslide/from-hook-20200820/_mintpy_time_series
+#s3Uri=s3://aria-dev-lts-fwd-xing/test-landslide/from-hook-20200820/_mintpy_time_series
 
 sh -xv ./run.sh $s3Uri
 
